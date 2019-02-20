@@ -1,0 +1,19 @@
+#appWrapper{
+  display: block;
+  align-content: center;
+}
+
+#heading {
+  text-align: center;
+}
+
+#timestamps {
+  text-align: center;
+}
+
+#theChart {
+  display: block;
+  align-self: center;
+  position: relative;
+  width: 70%;
+}

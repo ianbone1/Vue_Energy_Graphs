@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Energy Generation</title>
+	<script src="./js/bundle.js"></script>
+	<link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+	<div id="app">
+		<div v-if="!dataFetched">Fetching Data......</div>
+		<div id="appWrapper" v-if="dataFetched">
+			<h2 id="heading">Energy Generation</h2>
+			<div id="timestamps">
+				<div id="dateFrom">Data snapped from: {{ dateFrom.toLocaleDateString() }} @ {{dateFrom.toLocaleTimeString() }}</div>
+				<div id="dateTo">Data snapped to: {{ dateTo.toLocaleDateString() }} @ {{dateTo.toLocaleTimeString() }}</div>
+
+					<div class="graphSelectorWrapper">
+						<label for="chartType">Change Graph Type:</label>
+						<select name="chartType" id="chartType" v-model="selectedChartType">
+							<option v-for="chartType in chartTypes" :value="chartType">{{ chartType }}</option>
+						</select>
+					</div>
+
+			</div>
+			<div id="theChart">
+				<GChart
+				v-if="chartData"
+				:type="selectedChartType"
+				:data="chartData"
+				:options="chartOptions"
+				/>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
