@@ -8,11 +8,11 @@
 <body>
 	<div id="app">
 		<div v-if="!dataFetched">Fetching Data......</div>
-		<div id="appWrapper" v-if="dataFetched">
+		<div v-if="dataFetched" id="appWrapper">
 			<h2 id="heading">Energy Generation</h2>
 			<div id="timestamps">
-				<div id="dateFrom">Data snapped from: {{ dateFrom.toLocaleDateString() }} @ {{dateFrom.toLocaleTimeString() }}</div>
-				<div id="dateTo">Data snapped to: {{ dateTo.toLocaleDateString() }} @ {{dateTo.toLocaleTimeString() }}</div>
+				<!-- <div id="dateFrom">Data snapped from: {{ dateFrom.toLocaleDateString() }} @ {{dateFrom.toLocaleTimeString() }}</div> -->
+				<!-- <div id="dateTo">Data snapped to: {{ dateTo.toLocaleDateString() }} @ {{dateTo.toLocaleTimeString() }}</div> -->
 
 					<div class="graphSelectorWrapper">
 						<label for="chartType">Change Graph Type:</label>
@@ -21,8 +21,16 @@
 						</select>
 					</div>
 
+					<div id="dateFromWrapper">
+						<label for="selectedFromDate">Select Start Date: {{ selectedFromDate }}</label>
+						<input type="date" id="selectedFromDate" v-model="selectedFromDate" :max="twoDaysAgo">
+						<label for="selectedToDate">Select End Date: {{ selectedToDate }}</label>
+						<input type="date" id="selectedToDate" v-model="selectedToDate" :max="oneDayAgo">
+						<button v-on:click="fetchData">Get Data</button>
+					</div>
+
 			</div>
-			<div id="theChart">
+			<div v-if="chartData!=[]" id="theChart">
 				<GChart
 				v-if="chartData"
 				:type="selectedChartType"
